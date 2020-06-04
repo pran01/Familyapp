@@ -5,6 +5,6 @@ from flask import render_template,url_for
 def getaccess():
     return render_template('getaccess.html')
 
-@app.route("/",methods=['GET','POSt'])
+@app.route("/family_tree",methods=['GET','POSt'])
 def familytree():
     return render_template('familytree.html')
