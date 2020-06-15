@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% block head %}
+<title>Login</title>
+{% endblock %}
+{% block body %}
+<div class="container">
+<form action="" method="POST">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+        <div class="form-group">
+        <p>{{form.email.label}}<br>
+            {{form.email(size=10,class="form-control form-control-lg")}}
+            <div class="invalid-feedback">
+            {% for error in form.email.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+            </div>
+        </p>
+        <p>{{form.password.label}}<br>
+            {{form.password(size=19,class="form-control form-control-lg")}}
+            <div class="invalid-feedback">
+            {% for error in form.password.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+            </div>
+        </p>
+        <p>{{form.remember()}}  {{form.remember.label}}</p>
+        <p>{{form.login(class="btn btn-outline-info")}}</p>
+        </div>
+    </fieldset>
+</form>
+<a href="{{url_for('getaccess')}}">Forgot Password?</a>
+</div>
+{% endblock %}
