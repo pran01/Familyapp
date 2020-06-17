@@ -5,12 +5,14 @@ html, body {
 .full-height {
   height: 100%;
 }
+
 .btncenter {
         position: absolute;
         top: 50%;
         left: 50%;
         margin-right: -50%;
         transform: translate(-50%, -50%) }
+
 .whoareyoudiv{
     padding: 10px;
     background: white;
@@ -23,4 +25,62 @@ html, body {
     max-height: 100%;
     overflow-y: scroll;
     alignment: center;
+}
+
+.user_card {
+    height: 400px;
+    width: 350px;
+    margin-top: auto;
+    margin-bottom: auto;
+    background: #3AAFA9;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: 10px 10px 50px #17252A;
+    -webkit-box-shadow: 10px 10px 50px #17252A;
+    -moz-box-shadow: 10px 10px 50px #17252A;
+    border-radius: 20px;
+}
+.brand_logo_container {
+    position: absolute;
+    height: 170px;
+    width: 170px;
+    top: -75px;
+    border-radius: 50%;
+    background: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: 5px;
+}
+.brand_logo {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border: 0px solid white;
+}
+
+.form_container {
+margin-top: 100px;
+}
+
+.black{
+    background: #2B7A78;
+}
+
+.profile_pic {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 0px solid white;
+}
+
+.home-menu{
+    height:auto;
+    width: 70%;
+    background: #E3AFBC;
+    box-shadow: 2px 2px 20px #9A1750;
+    border-radius: 10px;
+    color: white;
 }

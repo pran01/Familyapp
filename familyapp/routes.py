@@ -7,24 +7,35 @@ from flask_login import login_user,logout_user,current_user,login_required
 from flask_mail import Message
 import secrets,os
 
+
 @app.route("/",methods=['GET','POST'])
 def getaccess():
+    if current_user.is_authenticated:
+        return redirect(url_for('home',name=current_user.name))
     return render_template('getaccess.html')
+
+
+@app.route("/home/<name>",methods=['POST','GET'])
+def home(name):
+    return render_template('home.html',name=name,Users=Users)
 
 @app.route("/family_tree",methods=['GET','POSt'])
 def familytree():
-    return render_template('familytree.html')
+    return render_template('familytree.html',Users=Users)
 
 @app.route('/login/<name>',methods=['POST','GET'])
 def login(name):
     form=LoginForm()
+    if Users.query.filter_by(name=name).first().email:
+        form.email.data=Users.query.filter_by(name=name).first().email
+    else:
+        form.email.data=name
     if form.validate_on_submit():
-        user=Users.query.filter_by(email=form.email.data).first()
+        user=Users.query.filter_by(name=name).first()
         if user:
             if check_password_hash(user.passwd,form.password.data):
                 login_user(user)
-                flash('Login Successful','success')
-                return redirect(url_for('getaccess'))
+                return redirect(url_for('home',name=name))
             else:
                 flash('password incorrect','danger')
                 return redirect(url_for('login',name=name))
@@ -32,7 +43,7 @@ def login(name):
             flash('username incorrect','danger')
             return redirect(url_for('login', name=name))
     else:
-        return render_template('login.html',form=form,name=name)
+        return render_template('login.html',form=form,name=name,Users=Users)
 
 
 def save_picture(form_picture):
@@ -51,10 +62,12 @@ def register():
         form=RegisterForm()
         if form.validate_on_submit():
             hashed_password=generate_password_hash(form.password.data, method='sha256')
-            new_user=Users(name=form.name.data,email=form.email.data,passwd=hashed_password)
+            new_user=Users(name=form.name.data,passwd=hashed_password)
             if form.image.data:
                 image_file=save_picture(form.image.data)
                 new_user.image=image_file
+            if form.email.data:
+                new_user.email=form.email.data
             db.session.add(new_user)
             db.session.commit()
             return redirect(url_for('getaccess'))
@@ -65,3 +78,9 @@ def register():
         return redirect(url_for('login',name='Pranav Sinha'))
 
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Logged out Successfully', 'success')
+    return redirect(url_for('getaccess'))

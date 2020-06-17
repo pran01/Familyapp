@@ -1,0 +1,178 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<title>Home</title>
+{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-md navbar-dark navbar-fixed-top" style="background: #9A1750"><!--#0C00320-->
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">FamilyApp</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" id="profile-btn">
+      <i class="fas fa-angle-double-down" id="arrow"></i>
+      <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name=name).first().image)}}"
+                   class="profile_pic" alt="Logo">
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="#"><i class="fa fa-home"></i> Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user-edit"></i> Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for('logout')}}"><i class="fas fa-sign-out-alt"></i> Sign-out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container" style="margin-top: 20%; margin-bottom: 5%">
+<div class="container home-menu">
+  <br>
+  <a href="#" type="button" class="btn btn-block" style="color: white" data-toggle="modal" data-target="#aboutfamily"><span class="fas fa-user-friends" style="margin-right: 0.6em">
+  </span>
+    About the Family</a>
+  <hr style="border: 1px solid white;">
+  <a href="#" type="button" class="btn btn-block" style="color: white"><span class="far fa-calendar-alt" style="margin-right: 0.6em"></span>
+    Family Calendar</a>
+  <hr style="border: 1px solid white;">
+  <a href="#" type="button" class="btn btn-block" style="color: white"><span class="fas fa-mail-bulk" style="margin-right: 0.6em"></span>
+    Send Email to everyone</a>
+  <hr style="border: 1px solid white;">
+  <a href="#" type="button" class="btn btn-block" style="color: white"><span class="far fa-address-book" style="margin-right: 0.6em"></span>
+    Contacts</a>
+  <br>
+</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="aboutfamily" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">About Us</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='P. N. Sinha').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>P. N. Sinha</b><br><br>
+        Being the eldest, he is also the most practical and hard working person in family.<br>
+        He waits to give us the 200 rupees on special occasions more than we do.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Lalita Sinha').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"><b> Lalita Sinha</b><br><br>
+        There is no room like hers and no lap either.<br>
+        If theres one person who can always make your day better, its her.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Prabhat Kumar').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Prabhat Kumar</b><br><br>
+        Poplarly known as 'Diku Papa'.<br>
+        He keeps switching between different footwear, different phones, and different beard styles.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Seema Sinha').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Seema Sinha</b><br><br>
+        Unfortunately, she doesnt get to eat meat anymore, but tries to compensate
+        with nutrela chilli  while singing in kitchen.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Pradeep Kumar').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Pradeep Kumar</b><br><br>
+        The person we were most scared of when we were little,
+        but unfortunately nobody's scared anymore, especially Shivam.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Abha Sinha').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Abha Sinha</b><br><br>
+        Very famously from Ara, the house stays the way it is because of her.<br>
+        Also, hers is the cleanest room in the house. <br>
+        P.S. We are still scared of her a little bit, especially Shivam.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Pravin Kumar').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Pravin Kumar</b><br><br>
+        The only person Patrick is scared of. <br>
+        The second most practical person and most energetic at the weirdest times possible.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Sweta Kumari').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Sweta Kumari</b><br><br>
+        Famously called 'Chhoti mom'. <br>
+        She is known to cook the best delicacies, and also the person best at knowing the perfect places to shop.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Ajay Kumar Sinha').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Ajay Kumar Sinha</b><br><br>
+        Everybody loves him the most and rightly so. <br>
+        He is the one who will watch cartoon with you, watch news with the others,<br>
+        and watch videos of Chikchik and molu over everything else.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Jyoti Sinha').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Jyoti Sinha</b><br><br>
+        she has the superpower to sleep anywhere,<br>
+        specially the edge of the bed. <br>
+        And, is often found on her way to hanuman mandir, Patna.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Runnu Sinha').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Runnu Sinha</b><br><br>
+        She is the bridge between the elders and us children. <br>
+        Often seen with Munder at 4:00 in the morning watching a movie, <br>
+        and if not, on her phone watching dog videos. <br>
+        Self proclaimed mother of dogs.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Sachin Sinha').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Sachin Sinha</b><br><br>
+        The second person after dadu, everybody is a little scared of, especially phuphaji.<br>
+        He's often seen with a guitar sitting in a corner, <br>
+        with Jyoti bua nagging at him to take medicines.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Bhavya Sinha').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Bhavya Sinha</b><br><br>
+        Famously known as didi, often referred to as Jyoti by Amma.<br>
+        She's always seen with a book and her eyesight is just as bad as Sonu papa and Runnu didi's. <br>
+        The only person Patrick doesn't mind so much. <br>
+        That's a huge, huge compliment.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Pranay Sinha').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Pranay Sinha</b><br><br>
+        When he gets married( very soon ), <br>
+        everybody has collectively devided to serve aloo ka bhujia.<br>
+        He is often seen without a tshirt or in a really bad one.<br>
+        Strangely, he is attracted to pony tails and braids.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Pranav Sinha').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Pranav Sinha</b><br><br>
+        The go to person for technical advice,<br>
+        and the only person Diku papa trusts with his phone.<br>
+        It is very difficult to wake him up in the morning,<br>
+        and to know what is going on in his mind(he looks innocent but isn't).
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Prajjwal Sinha').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Prajjwal Sinha</b><br><br>
+        The Bade miya while chhote miya is patrick. <br>
+        Finds it very difficult to call Mamma, "mamma".<br>
+        Thats the only problem in his life.<br>
+        Loves food, especially chicken. But not as much as Shivam.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Prateek Sinha').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Prateek Sinha</b><br><br>
+        Famously known as Chef Prateek, and cricketer, also an artist, <br>
+        the master of the house. <br>
+        He might look small but don't dare take his paneer, <br>
+        he might cook you instead.
+        <hr>
+        <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Pratyaksha Sinha').first().image)}}"
+             class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Pratyaksha Sinha</b><br><br>
+        Rightly named Bebo, she's often Tik-Tok-ing. <br>
+        If there's a person who can cry in 3 seconds,<br>
+        its probably her. (and aalu chilne wali mummy).<br>
+        If you want an abundance of love and care and all the good things,<br>
+        go to bebo although she might not care much and continue watching cartoon.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

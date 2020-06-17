@@ -5,5 +5,9 @@
 
 {% block body %}
 <img src="static/images/blurred.jpg" style="height: 100%;width: 100%;">
-<a href="{{url_for('familytree')}}" class="btn btn-primary btn-block btncenter">Get Access</a>
+<a href="{{url_for('familytree')}}" class="btn btn-primary btn-block btncenter">
+    <span class="fas fa-universal-access" style="margin-right: 0.6em"></span>
+    Get Access
+    <span class="fas fa-universal-access" style="margin-left: 0.6em"></span>
+</a>
 {% endblock %}

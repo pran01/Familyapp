@@ -16,7 +16,7 @@ class LoginForm(FlaskForm):
 
 class RegisterForm(FlaskForm):
     name=StringField('Name',validators=[DataRequired(message='username can\'t be empty'),Length(min=5,max=20)])
-    email=StringField('Email',validators=[Email()])
+    email=StringField('Email')
     password=PasswordField('Password',validators=[DataRequired(message='password cannot be empty'),Length(min=8,max=80)])
     conf_password = PasswordField('Confirm Password',validators=[DataRequired(message='password cannot be empty'), EqualTo('password')])
     image=FileField('Profile Picture',validators=[FileAllowed(['jpg','png'])])
