@@ -84,3 +84,8 @@ def logout():
     logout_user()
     flash('Logged out Successfully', 'success')
     return redirect(url_for('getaccess'))
+
+@app.route('/<name>/family_calendar')
+@login_required
+def calendar(name):
+    return render_template('familycalendar.html',name=name)

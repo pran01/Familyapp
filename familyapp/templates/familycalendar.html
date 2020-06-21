@@ -7,28 +7,60 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
           crossorigin="anonymous">
+
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
     <!-- Fontawesome icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
           crossorigin="anonymous">
-	{% block head %}
-
-	{% endblock %}
+    <title>Calendar</title>
 </head>
-<body>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category,message in messages %}
-                <div class="alert alert-{{ category }}">
-                {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-        {% endwith %}
-        {% block body %}
 
-        {% endblock %}
+<body>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-block">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">X</span>
+        </button>
+        <h2 class="modal-title text-center font-weight-bold" id="exampleModalScrollableTitle">Event Details</h2>
+      </div>
+      <div class="modal-body text-center">
+        <img src="{{url_for('static',filename='images/person.png')}}" style="height:100px;width:100px;"/>
+          <h3></h3>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="calendar-container">
+        <a href="{{url_for('home',name=current_user.name)}}" type="button" style="align-self: flex-start; margin:5px 5px; background: #003366; padding: 5px 10px; border: 1px solid black;
+box-shadow:5px 5px 20px black; border-radius: 10px; text-decoration: none; color: white">
+            <i class="far fa-caret-square-left" style="margin-right: 5px;"></i>Back
+        </a><br>
+      <div class="calendar">
+        <div class="month">
+          <i class="fas fa-angle-left prev"></i>
+          <div class="date">
+            <h1></h1>
+            <p></p>
+          </div>
+          <i class="fas fa-angle-right next"></i>
+        </div>
+        <div class="weekdays">
+          <div>Sun</div>
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+        </div>
+        <div class="days"></div>
+      </div>
+    </div>
         <!-- jquery cdn-->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

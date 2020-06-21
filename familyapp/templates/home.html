@@ -5,18 +5,20 @@
 {% endblock %}
 
 {% block body %}
-<nav class="navbar navbar-expand-md navbar-dark navbar-fixed-top" style="background: #9A1750"><!--#0C00320-->
-  <!-- Brand -->
+
+
+<nav class="navbar navbar-dark" style="background: #9A1750">
+
   <a class="navbar-brand" href="#">FamilyApp</a>
 
-  <!-- Toggler/collapsibe Button -->
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" id="profile-btn">
       <i class="fas fa-angle-double-down" id="arrow"></i>
       <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name=name).first().image)}}"
                    class="profile_pic" alt="Logo">
   </button>
 
-  <!-- Navbar links -->
+
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -38,7 +40,7 @@
   </span>
     About the Family</a>
   <hr style="border: 1px solid white;">
-  <a href="#" type="button" class="btn btn-block" style="color: white"><span class="far fa-calendar-alt" style="margin-right: 0.6em"></span>
+  <a href="{{url_for('calendar',name=current_user.name)}}" type="button" class="btn btn-block" style="color: white"><span class="far fa-calendar-alt" style="margin-right: 0.6em"></span>
     Family Calendar</a>
   <hr style="border: 1px solid white;">
   <a href="#" type="button" class="btn btn-block" style="color: white"><span class="fas fa-mail-bulk" style="margin-right: 0.6em"></span>
@@ -68,11 +70,11 @@
         <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Lalita Sinha').first().image)}}"
              class="profile_pic" alt="Logo" style="margin-right: 1em"><b> Lalita Sinha</b><br><br>
         There is no room like hers and no lap either.<br>
-        If theres one person who can always make your day better, its her.
+        If there's one person who can always make your day better, its her.
         <hr>
         <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Prabhat Kumar').first().image)}}"
              class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Prabhat Kumar</b><br><br>
-        Poplarly known as 'Diku Papa'.<br>
+        Popularly known as 'Diku Papa'.<br>
         He keeps switching between different footwear, different phones, and different beard styles.
         <hr>
         <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Seema Sinha').first().image)}}"
@@ -136,8 +138,8 @@
         <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Pranay Sinha').first().image)}}"
              class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Pranay Sinha</b><br><br>
         When he gets married( very soon ), <br>
-        everybody has collectively devided to serve aloo ka bhujia.<br>
-        He is often seen without a tshirt or in a really bad one.<br>
+        everybody has collectively decided to serve aloo ka bhujia.<br>
+        He is often seen without a t-shirt or in a really bad one.<br>
         Strangely, he is attracted to pony tails and braids.
         <hr>
         <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Pranav Sinha').first().image)}}"
@@ -151,7 +153,7 @@
              class="profile_pic" alt="Logo" style="margin-right: 1em"> <b>Prajjwal Sinha</b><br><br>
         The Bade miya while chhote miya is patrick. <br>
         Finds it very difficult to call Mamma, "mamma".<br>
-        Thats the only problem in his life.<br>
+        That's the only problem in his life.<br>
         Loves food, especially chicken. But not as much as Shivam.
         <hr>
         <img src="{{url_for('static',filename='profile_pics/'+Users.query.filter_by(name='Prateek Sinha').first().image)}}"
