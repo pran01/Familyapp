@@ -1,11 +1,12 @@
-from Familyapp.familyapp import app,db,mail
+from Familyapp.familyapp import app,db
 from flask import render_template,url_for,redirect,request,flash
-from Familyapp.familyapp.forms import LoginForm,RegisterForm
-from Familyapp.familyapp.models import Users
+from Familyapp.familyapp.forms import LoginForm,RegisterForm,SendEmailForm
+from Familyapp.familyapp.models import Users,Numbers
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import login_user,logout_user,current_user,login_required
-from flask_mail import Message
+from email.message import EmailMessage
 import secrets,os
+import smtplib
 
 
 @app.route("/",methods=['GET','POST'])
@@ -15,9 +16,29 @@ def getaccess():
     return render_template('getaccess.html')
 
 
+def send_email(user,message):
+    with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
+        smtp.login(os.environ.get('MAIL_USER'),os.environ.get('MAIL_PASSWORD'))
+        msg=EmailMessage()
+        msg['Subject']="A message From Family App"
+        msg['From']=os.environ.get('MAIL_USER')
+        msg['TO']=user.email
+        msg.set_content(f"""{message}\n-By {current_user.name}""")
+        smtp.send_message(msg)
+
+
 @app.route("/home/<name>",methods=['POST','GET'])
 def home(name):
-    return render_template('home.html',name=name,Users=Users)
+    form=SendEmailForm()
+    form.name.data=current_user.name
+    if form.validate_on_submit():
+        users=Users.query.all()
+        for user in users:
+            if user.email:
+                send_email(user, form.message.data)
+        flash('Mail Sent Successfully','success')
+        return redirect(url_for('home',name=current_user.name,form=form,Numbers=Numbers))
+    return render_template('home.html',name=name,Users=Users,form=form,Numbers=Numbers)
 
 @app.route("/family_tree",methods=['GET','POSt'])
 def familytree():

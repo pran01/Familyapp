@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,BooleanField,SubmitField
+from wtforms import StringField,PasswordField,BooleanField,SubmitField,TextAreaField
 from wtforms.validators import DataRequired,Length,ValidationError,Email,EqualTo
 from Familyapp.familyapp.models import Users
 from flask_wtf.file import FileField,FileAllowed
@@ -30,3 +30,9 @@ class RegisterForm(FlaskForm):
         user=Users.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('Email Already Exist')
+
+
+class SendEmailForm(FlaskForm):
+    message=TextAreaField('Message',validators=[DataRequired(message="Message can't be empty."),Length(min=10,max=500)])
+    name=StringField('By')
+    send=SubmitField('Send Mail')

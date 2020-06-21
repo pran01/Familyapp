@@ -35,3 +35,12 @@ class Users(UserMixin,db.Model):
     def __repr__(self):
         return "User('{}','{}','{}','{}',is_admin='{}')".format(self.id,self.name,self.email,self.image,self.is_admin)
 
+class Numbers(UserMixin,db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(100),nullable=False)
+    number1 = db.Column(db.String(13),nullable=True)
+    number2 = db.Column(db.String(13), nullable=True)
+
+
+    def __repr__(self):
+        return "Number('{}','{}','{}','{}')".format(self.id,self.name,self.number1,self.number2)
