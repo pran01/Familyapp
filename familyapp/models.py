@@ -1,4 +1,4 @@
-from Familyapp.familyapp import app,db,login_manager
+from familyapp import app,db,login_manager
 from flask_login import UserMixin,current_user
 from flask_admin.contrib.sqla import ModelView
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer

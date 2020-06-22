@@ -16,4 +16,4 @@ login_manager.init_app(app)
 login_manager.login_view='login'
 login_manager.login_message_category='info'
 
-from Familyapp.familyapp import routes
+from familyapp import routes
