@@ -17,6 +17,9 @@
 </head>
 
 <body>
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
      aria-hidden="true">
@@ -29,12 +32,18 @@
         <h2 class="modal-title text-center font-weight-bold" id="exampleModalScrollableTitle">Event Details</h2>
       </div>
       <div class="modal-body text-center">
-        <img src="{{url_for('static',filename='images/person.png')}}" style="height:100px;width:100px;"/>
-          <h3></h3>
+        <img src="" style="height:150px;width:150px;" id="myModalImg"/>
+          <h3 id="myModalBody"></h3>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
+
     <div class="calendar-container">
         <a href="{{url_for('home',name=current_user.name)}}" type="button" style="align-self: flex-start;
         margin:15px 30px; margin-bottom: 20px;

@@ -15,10 +15,11 @@ class LoginForm(FlaskForm):
 
 
 class RegisterForm(FlaskForm):
-    name=StringField('Name',validators=[DataRequired(message='username can\'t be empty'),Length(min=5,max=20)])
+    name=StringField('Name',validators=[DataRequired(message='Name can\'t be empty'),Length(min=5,max=20)])
     email=StringField('Email')
     password=PasswordField('Password',validators=[DataRequired(message='password cannot be empty'),Length(min=8,max=80)])
-    conf_password = PasswordField('Confirm Password',validators=[DataRequired(message='password cannot be empty'), EqualTo('password')])
+    conf_password = PasswordField('Confirm Password',validators=[DataRequired(message='password cannot be empty'),
+                                                                 EqualTo('password')])
     image=FileField('Profile Picture',validators=[FileAllowed(['jpg','png'])])
     register=SubmitField('Register')
     def validate_username(self,username):
@@ -36,3 +37,16 @@ class SendEmailForm(FlaskForm):
     message=TextAreaField('Message',validators=[DataRequired(message="Message can't be empty."),Length(min=10,max=500)])
     name=StringField('By')
     send=SubmitField('Send Mail')
+
+
+class UpdateProfileForm(FlaskForm):
+    name = StringField('Name')
+    image = FileField('Profile Picture',validators=[FileAllowed(['jpg','png'])])
+    submit = SubmitField('Submit Changes')
+
+
+class UpdatePasswordForm(FlaskForm):
+    name = StringField('Name')
+    password = PasswordField("New Password",validators=[Length(min=8,max=80)])
+    conf_password = PasswordField("Confirm Password",validators=[Length(min=8,max=80),EqualTo('password')])
+    submit = SubmitField('Submit Changes')

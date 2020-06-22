@@ -1,7 +1,6 @@
 const date = new Date();
 
-myModalImage=document.querySelector("#mymodal img");
-myModalBody=document.querySelector("#myModal h3");
+
 
 const renderCalendar = () => {
   date.setDate(1);
@@ -142,7 +141,12 @@ const renderCalendar = () => {
 
   document.querySelectorAll(".normal-dates, .today").forEach(item => {
   item.addEventListener("click", event => {
+    $('#myModal').modal('show');
+    myModalBody=document.getElementById('myModalBody');
     myModalBody.innerHTML="No Events on this date.";
+    myModalImage=document.getElementById('myModalImg');
+    myModalImage.src="static/images/404_not_found.png";
+
     var targetDate=new Date();
     targetDate.setDate(event.target.textContent);
     targetDate.setMonth(date.getMonth());
@@ -153,13 +157,20 @@ const renderCalendar = () => {
         if (eventsThisMonth[targetDate.getDate()].length === 3){
           myModalBody.innerHTML=eventsThisMonth[targetDate.getDate()][0]+" of "+
               eventsThisMonth[targetDate.getDate()][1]+" and "+eventsThisMonth[targetDate.getDate()][2];
+          myModalImage.src=
+              `static/${eventsThisMonth[targetDate.getDate()][0]}/${eventsThisMonth[targetDate.getDate()][1]}.png`;
         }
         else {
-          myModalBody.innerHTML=eventsThisMonth[targetDate.getDate()][0] + " of " + eventsThisMonth[targetDate.getDate()][1];
+          myModalBody.innerHTML=
+              eventsThisMonth[targetDate.getDate()][0] + " of " + eventsThisMonth[targetDate.getDate()][1];
+          myModalImage.src=
+              `static/${eventsThisMonth[targetDate.getDate()][0]}/${eventsThisMonth[targetDate.getDate()][1]}.png`;
         }
         }
     }
-    $('#myModal').modal('show');
+    else{
+
+    }
   })
 });
 };

@@ -1,6 +1,6 @@
 from Familyapp.familyapp import app,db
 from flask import render_template,url_for,redirect,request,flash
-from Familyapp.familyapp.forms import LoginForm,RegisterForm,SendEmailForm
+from Familyapp.familyapp.forms import LoginForm,RegisterForm,SendEmailForm,UpdateProfileForm,UpdatePasswordForm
 from Familyapp.familyapp.models import Users,Numbers
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import login_user,logout_user,current_user,login_required
@@ -27,8 +27,9 @@ def send_email(user,message):
         smtp.send_message(msg)
 
 
-@app.route("/home/<name>",methods=['POST','GET'])
-def home(name):
+@app.route("/home",methods=['POST','GET'])
+@login_required
+def home():
     form=SendEmailForm()
     form.name.data=current_user.name
     if form.validate_on_submit():
@@ -38,7 +39,37 @@ def home(name):
                 send_email(user, form.message.data)
         flash('Mail Sent Successfully','success')
         return redirect(url_for('home',name=current_user.name,form=form,Numbers=Numbers))
-    return render_template('home.html',name=name,Users=Users,form=form,Numbers=Numbers)
+    return render_template('home.html',name=current_user.name,Users=Users,form=form,Numbers=Numbers)
+
+
+@app.route("/profile",methods=['POST','GET'])
+@login_required
+def profile():
+    form=UpdateProfileForm()
+    form.name.data=current_user.name
+    if form.validate_on_submit():
+        if form.image.data:
+            image_file=save_picture(form.image.data)
+            current_user.image=image_file
+        db.session.commit()
+        flash('Changes Saved','success')
+        return redirect(url_for('profile',name=current_user.name,form=form,Users=Users))
+    return render_template('updateprofile.html',name=current_user.name,form=form,Users=Users)
+
+
+@app.route("/updatePassword",methods=['POST','GET'])
+@login_required
+def updatepassword():
+    form=UpdatePasswordForm()
+    form.name.data=current_user.name
+    if form.validate_on_submit():
+        hashed_pass=generate_password_hash(form.password.data,method="sha256")
+        current_user.passwd=hashed_pass
+        db.session.commit()
+        flash('Changes Saved','success')
+        return redirect(url_for('profile',name=current_user.name,form=form,Users=Users))
+    return render_template('updatepassword.html',name=current_user.name,form=form,Users=Users)
+
 
 @app.route("/family_tree",methods=['GET','POSt'])
 def familytree():
@@ -55,7 +86,7 @@ def login(name):
         user=Users.query.filter_by(name=name).first()
         if user:
             if check_password_hash(user.passwd,form.password.data):
-                login_user(user)
+                login_user(user,remember=True)
                 return redirect(url_for('home',name=name))
             else:
                 flash('password incorrect','danger')
@@ -106,7 +137,7 @@ def logout():
     flash('Logged out Successfully', 'success')
     return redirect(url_for('getaccess'))
 
-@app.route('/<name>/family_calendar')
+@app.route('/family_calendar')
 @login_required
-def calendar(name):
-    return render_template('familycalendar.html',name=name)
+def calendar():
+    return render_template('familycalendar.html',name=current_user.name)

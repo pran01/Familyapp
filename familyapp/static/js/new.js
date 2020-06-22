@@ -1,6 +1,8 @@
 const profileBtn=document.querySelector('#profile-btn');
 const arrow=document.querySelector('#arrow');
 const menu = document.querySelector(".home-menu");
+
+
 function changeArrow() {
     if (arrow.className === 'fas fa-angle-double-down') {
         arrow.className = 'fas fa-angle-double-up';
