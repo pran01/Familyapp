@@ -4,14 +4,10 @@ from wtforms.validators import DataRequired,Length,ValidationError,Email,EqualTo
 from familyapp.models import Users
 from flask_wtf.file import FileField,FileAllowed
 class LoginForm(FlaskForm):
-    email=StringField('Email',validators=[Email(message='Email format incorrect')])
+    email=StringField('Email')
     password = PasswordField('Password',validators=[DataRequired(message='password cannot be empty'), Length(min=8, max=80)])
     remember = BooleanField('Remember me')
     login=SubmitField('Login')
-    def validate_email(self,email):
-        user=Users.query.filter_by(email=email.data).first()
-        if not user:
-            raise ValidationError('Username Does Not exist')
 
 
 class RegisterForm(FlaskForm):
