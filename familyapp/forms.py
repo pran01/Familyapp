@@ -8,10 +8,6 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password',validators=[DataRequired(message='password cannot be empty'), Length(min=8, max=80)])
     remember = BooleanField('Remember me')
     login=SubmitField('Login')
-    def validate_email(self,email):
-        user=Users.query.filter_by(email=email.data).first()
-        if not user:
-            raise ValidationError('Username Does Not exist')
 
 
 class RegisterForm(FlaskForm):
