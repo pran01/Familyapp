@@ -1,5 +1,7 @@
 # Familyapp
 
+A responsive web app personalised for and only accessible to my family.
+
 ## Demo
 <img src="./Images/familyapp_desktop.gif" height="200"/>  <img src="./Images/familyapp_mobile.gif" height="200"/><br />
 
